@@ -16,9 +16,7 @@ const Header = () => {
     const loggedIn = useSelector((state: RootState) => state.app.loggedIn);
 
     if (!loggedIn) {
-      return (
-        <div></div>
-      );
+      return null;
     }
 
     return (
