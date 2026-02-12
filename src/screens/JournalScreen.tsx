@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { fetchJournal } from "../api/journal";
 import { useDispatch } from "react-redux";
-import { setJournalStore } from "../redux/journalSlice";
+import { setJournalStore, addEntryStore } from "../redux/journalSlice";
 import "./JournalScreen.css";
 import JournalList from "../components/JournalList";
 import JournalEditor from "../components/JournalEditor";
-
+import { addEntry } from "../api/journal";
 
 
 const JournalScreen = () => {
@@ -19,6 +19,17 @@ const JournalScreen = () => {
     const selectedEntryId = useSelector((state: RootState) => state.journal.selectedEntryId);
 
     const selectedEntry = journal?.journalEntries.find(entry => entry.id === selectedEntryId);  
+
+    const handleAddEntry = async () => {
+        if (!userId || !jwtToken ) return;
+        try{
+            const newEntry = await addEntry(userId, jwtToken, "", new Date().toISOString(), "Untitled");
+            dispatch(addEntryStore({ id: newEntry.id, title: "Untitled", content: "", date: new Date().toISOString() }));
+
+        } catch (err) {
+            console.error("Failed to add entry", err);
+        }
+    }
    
 
 
@@ -37,7 +48,7 @@ const JournalScreen = () => {
     return (
         <div className="journal-screen">
             <div className="journal-actions">
-                <button className="add-entry-button">Add Entry</button>
+                <button className="add-entry-button" onClick={handleAddEntry}>Add Entry</button>
             </div>
             <div className="journal-container">
                 <JournalList entries={journal?.journalEntries ?? []}/>

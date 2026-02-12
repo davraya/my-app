@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { editSelectedEntry } from "../redux/journalSlice";
-
+import JournalMenuOptions from "./JournalMenuOptions";
 
 interface JournalEditorProps {
   title: string;
@@ -78,12 +78,20 @@ const JournalEditor = ({ title, content, date }: JournalEditorProps) => {
     return (
 
         <div className="journal-editor">
-            <input className="journal-title-input"
-                value={localTitle}    
-                onChange={(e) => setLocalTitle(e.target.value)}  
-                placeholder="Title"
-            />
-            <div className="journal-date">{date}</div>
+
+            <div className="journal-editor-header">
+                <div>
+                    <input className="journal-title-input"
+                    value={localTitle}    
+                    onChange={(e) => setLocalTitle(e.target.value)}  
+                    placeholder="Title"/>
+                    <div className="journal-date">{date}</div>
+                </div>
+                <div className="delete-button-container">
+                    <JournalMenuOptions />
+                </div>
+            </div>
+            
             <textarea className="journal-content-textarea"
                 value={localContent}
                 onChange={(e) => setLocalContent(e.target.value)}

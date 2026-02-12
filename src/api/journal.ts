@@ -64,5 +64,69 @@ export const editEntry = async (
     }
   };
 
+export const addEntry = async (
+  userId: string,
+  token: string,
+  content: string,
+  dateTime: string,
+  title: string
+  ): Promise<EntryResponse> => {
+    const url = `${API_BASE_URL}/api/journal/${userId}/add-entry`;
+  
+  try {
+    const response = await axios.patch<EntryResponse>(url, null, {
+      params: {
+        content,
+        dateTime,
+        title
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+      })
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error editing journal entry:', {
+          status: error.response?.status,
+          statusText: error.response?.statusText,
+          data: error.response?.data,
+        });
+      } else {
+        console.error('Unexpected error editing journal entry:', error);
+      }
+      throw error;
+      }
+  };
+
+export const deleteEntry = async (
+  userId: string,
+  token: string,
+  entryId: string
+): Promise<{ success: boolean }> => {
+  const url = `${API_BASE_URL}/api/journal/${userId}/${entryId}/delete-entry`;
+
+  try {
+    const response = await axios.delete<{ success: boolean }>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error deleting journal entry:', {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+      });
+    } else {
+      console.error('Unexpected error deleting journal entry:', error);
+    }
+    throw error;
+  }
+};
 
 
