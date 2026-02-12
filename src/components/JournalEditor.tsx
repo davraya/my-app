@@ -66,7 +66,17 @@ const JournalEditor = ({ title, content, date }: JournalEditorProps) => {
         run();
     }, [selectedEntryId, journal]);
 
+
+    if (!selectedEntryId) {
+        return (
+            <div className="journal-editor empty-state">
+                <p>Select an entry to start editing</p>
+            </div>
+        );
+    }
+
     return (
+
         <div className="journal-editor">
             <input className="journal-title-input"
                 value={localTitle}    

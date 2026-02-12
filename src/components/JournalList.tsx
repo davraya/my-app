@@ -20,9 +20,7 @@ const JournalList = ({ entries }: JournalListProps) => {
 
 
             <div className="journal-list-header">
-                <button className="add-entry-button" onClick={() => {}}>
-                + Add Entry
-                </button>
+                
             </div>
 
             <div className="journal-list-content">

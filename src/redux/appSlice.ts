@@ -31,20 +31,9 @@ const appSlice = createSlice({
         logout(state) {
             state.loggedIn = false;
             state.jwtToken = null;
-            state.userId = "";
+            state.userId = null;
             // Clear only specific localStorage items
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
-            localStorage.removeItem('userName');
-            localStorage.removeItem('userPicture');
-        },
-        clearAllData(state) {
-            // Reset to initial state
-            state.loggedIn = false;
-            state.jwtToken = null;
-            state.userId = "";
-            // Clear only specific localStorage items
-            localStorage.removeItem('token');
+            localStorage.removeItem('jwtToken');
             localStorage.removeItem('userId');
             localStorage.removeItem('userName');
             localStorage.removeItem('userPicture');
@@ -52,5 +41,5 @@ const appSlice = createSlice({
     },
 });
 
-export const { updateUserId, login, logout, clearAllData } = appSlice.actions;
+export const { updateUserId, login, logout } = appSlice.actions;
 export default appSlice.reducer;    

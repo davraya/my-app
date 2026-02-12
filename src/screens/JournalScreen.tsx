@@ -35,10 +35,16 @@ const JournalScreen = () => {
 
 
     return (
-        <div className="journal-container">
-            <JournalList entries={journal?.journalEntries ?? []}/>
-            <JournalEditor title={selectedEntry?.title ?? ""} content={selectedEntry?.content ?? ""} date={selectedEntry?.date ?? ""}/>
+        <div className="journal-screen">
+            <div className="journal-actions">
+                <button className="add-entry-button">Add Entry</button>
+            </div>
+            <div className="journal-container">
+                <JournalList entries={journal?.journalEntries ?? []}/>
+                <JournalEditor title={selectedEntry?.title ?? ""} content={selectedEntry?.content ?? ""} date={selectedEntry?.date ?? ""}/>
+            </div>
         </div>
+        
     )
 
 

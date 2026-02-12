@@ -1,3 +1,12 @@
+.journal-screen {
+  display: flex;
+  flex-direction: column;
+}
+.journal-actions {
+  padding-left: 24px;
+  padding-top: 24px;
+}
+
 .journal-container {
   display: flex;
   overflow: hidden;
@@ -5,4 +14,28 @@
   height: 100%;
   padding: 24px;
   background-color: #1a202c;
+}
+
+
+
+.add-entry-button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: fit-content;
+    
+}
+
+.add-entry-button:hover {
+    background-color: #2563eb;
+}
+
+.add-entry-button:active {
+    transform: scale(0.97);
 }
